@@ -22,6 +22,7 @@
         android:textSize="40dp"/>
 
 
+<!-- 1,2,3 LinearLayout으로 묶기 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -65,6 +66,7 @@
         android:textStyle="bold"/>
     </LinearLayout>
 
+    <!-- 4,5,6 LinearLayout으로 묶기 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -108,6 +110,7 @@
         android:textStyle="bold"/>
     </LinearLayout>
 
+    <!-- 7,8,9 LinearLayout으로 묶기 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -151,6 +154,7 @@
         android:textStyle="bold"/>
     </LinearLayout>
 
+    <!-- *,0,# LinearLayout으로 묶기 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
