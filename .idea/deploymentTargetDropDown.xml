@@ -37,6 +37,9 @@
           <timeTargetWasSelectedWithDropDown value="2024-03-29T15:30:02.932178500Z" />
         </State>
       </entry>
+      <entry key="ch08_event">
+        <State />
+      </entry>
       <entry key="ch09_resource">
         <State>
           <runningDeviceTargetSelectedWithDropDown>
@@ -52,6 +55,9 @@
           </runningDeviceTargetSelectedWithDropDown>
           <timeTargetWasSelectedWithDropDown value="2024-03-27T07:53:01.383650800Z" />
         </State>
+      </entry>
+      <entry key="ch10_dialog">
+        <State />
       </entry>
       <entry key="ch9_resource">
         <State />
