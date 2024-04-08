@@ -7,18 +7,24 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ch10_dialog.databinding.ActivityMainBinding
+import com.example.ch10_dialog.databinding.DialogCustomBinding
+
 
 class MainActivity : AppCompatActivity() {
+
+    // 바인딩 객체 생성
+    lateinit var binding : ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // 바인딩 객체 생성
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // 날짜 선택 다이얼로그 띄우기
@@ -117,6 +123,7 @@ class MainActivity : AppCompatActivity() {
             override fun onClick(dialog: DialogInterface?, which: Int) {
                 if (which == DialogInterface.BUTTON_POSITIVE) {
                     Log.d("mobileapp", "BUTTON_POSITIVE")
+                    binding.btnAlertSingle.text = "${items[selected]} 선택"
                 }
                 else if (which == DialogInterface.BUTTON_NEGATIVE) {
                     Log.d("mobileapp", "BUTTON_NEGATIVE")
@@ -141,12 +148,88 @@ class MainActivity : AppCompatActivity() {
 
         // 다중 선택 목록 알림 대화상자 버튼 클릭 시 이벤트 처리
         binding.btnAlertMulit.setOnClickListener{
+            AlertDialog.Builder(this).run() {
+                setTitle("알림 - 다수 선택")
+                setIcon(android.R.drawable.ic_dialog_alert)
 
+                setMultiChoiceItems(items, booleanArrayOf(false, true, false, true), object :DialogInterface.OnMultiChoiceClickListener{
+                    override fun onClick(dialog: DialogInterface?, which: Int, isChecked: Boolean) {
+                        Log.d("mobileapp", "$which ${if(isChecked) "선택" else "해제"}")
+                    }
+                })
+
+                setPositiveButton("예", eventHandler)
+                setNegativeButton("아니오", eventHandler)
+                show()
+            }
+        }
+
+        val dialogBinding = DialogCustomBinding.inflate(layoutInflater)
+
+        val eventHandler3 = object: DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+                if (which == DialogInterface.BUTTON_POSITIVE) {
+                    Log.d("mobileapp", "BUTTON_POSITIVE")
+                    if(dialogBinding.rbtn1.isChecked) {
+                        binding.btnAlertCustom.text = dialogBinding.rbtn1.text.toString()
+                    }
+                    else if(dialogBinding.rbtn2.isChecked) {
+                        binding.btnAlertCustom.text = dialogBinding.rbtn2.text.toString()
+                    }
+                    else if(dialogBinding.rbtn3.isChecked) {
+                        binding.btnAlertCustom.text = dialogBinding.rbtn3.text.toString()
+                    }
+                    else {
+                        binding.btnAlertCustom.text = dialogBinding.rbtn4.text.toString()
+                    }
+                }
+                else if (which == DialogInterface.BUTTON_NEGATIVE) {
+                    Log.d("mobileapp", "BUTTON_NEGATIVE")
+                }
+            }
         }
 
         // 커스텀 알림 대화상자 버튼 클릭 시 이벤트 처리
         binding.btnAlertCustom.setOnClickListener {
+            AlertDialog.Builder(this).run() {
+                setTitle("알림 - 사용자 화면")
+                setIcon(android.R.drawable.ic_dialog_alert)
 
+                setView(dialogBinding.root)
+
+                setPositiveButton("예", eventHandler3)
+                setNegativeButton("아니오", eventHandler3)
+                show()
+            }
         }
+    }
+
+    // Option Menu
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_navigation, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.item1 -> {
+                Log.d("mobileapp", "Option menu : 메뉴 1")
+                binding.btnDate.setTextColor(Color.parseColor("#FFFF00"))
+                true
+            }
+            R.id.item2 -> {
+                Log.d("mobileapp", "Option menu : 메뉴 2")
+                true
+            }
+            R.id.item3 -> {
+                Log.d("mobileapp", "Option menu : 메뉴 3")
+                true
+            }
+            R.id.item4 -> {
+                Log.d("mobileapp", "Option menu : 메뉴 4")
+                true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
