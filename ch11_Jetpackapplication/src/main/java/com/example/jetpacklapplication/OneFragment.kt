@@ -36,7 +36,6 @@ class OneFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         // Fragment 레이아웃을 인플레이트하여 바인딩
         val binding = FragmentOneBinding.inflate(inflater, container, false)
         return binding.root
