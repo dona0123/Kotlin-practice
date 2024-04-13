@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/ch08_event" />
             <option value="$PROJECT_DIR$/ch09_resource" />
             <option value="$PROJECT_DIR$/ch10_dialog" />
+            <option value="$PROJECT_DIR$/ch11_Jetpackapplication" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
