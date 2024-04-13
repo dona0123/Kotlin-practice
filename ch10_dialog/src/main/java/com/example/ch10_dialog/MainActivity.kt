@@ -12,7 +12,9 @@ import android.view.MenuItem
 import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import com.example.ch10_dialog.databinding.ActivityMainBinding
 import com.example.ch10_dialog.databinding.DialogCustomBinding
 
@@ -21,11 +23,16 @@ class MainActivity : AppCompatActivity() {
 
     // 바인딩 객체 생성
     lateinit var binding : ActivityMainBinding
+    lateinit var toggle : ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        toggle = ActionBarDrawerToggle(this, binding.drawer, R.string.drawer_opened, R.string.drawer_closed)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toggle.syncState()
 
         // 날짜 선택 다이얼로그 띄우기
         binding.btnDate.setOnClickListener {
@@ -216,11 +223,35 @@ class MainActivity : AppCompatActivity() {
         // 옵션 메뉴를 확장하여 메뉴 아이템을 추가
         // menu_navigation.xml 파일에 정의된 메뉴 리소스를 인플레이트하여 옵션 메뉴에 추가
         menuInflater.inflate(R.menu.menu_navigation, menu)
+
+        // 뷰를 가지고 있는 메뉴 아이템을 추가
+        // import 단축키 (alt + enter)
+        val searchView = menu?.findItem(R.id.menu_search)?.actionView as SearchView
+
+        // 검색어 입력 이벤트 처리
+        // Query(검색어)에서 일어나는 이벤트 처리
+        searchView.setOnQueryTextListener(object :SearchView.OnQueryTextListener {
+            // 검색어를 입력하고 엔터버튼을 눌렀을 때
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                Toast.makeText(applicationContext, "$query 검색합니다.", Toast.LENGTH_LONG).show()
+                return true
+            }
+
+            // 검색어에 변경이 생길 때
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+        })
+
         // 추가적인 초기화나 설정 작업
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(toggle.onOptionsItemSelected(item)) {
+            return true
+        }
+
         // 옵션 메뉴 아이템 클릭 이벤트 처리
         when(item.itemId) {
             R.id.item1 -> {
