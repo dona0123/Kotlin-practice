@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // 단일 선택 목록 알림 대화상자 버튼 클릭 시 이벤트 처리
+        // 단일 선택 목록 알림 대화상자 버튼 클릭 시 이벤트 처리 (라디오버튼)
         var selected = 0
         val eventHandler2 = object:DialogInterface.OnClickListener {
             override fun onClick(dialog: DialogInterface?, which: Int) {
@@ -146,7 +146,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // 다중 선택 목록 알림 대화상자 버튼 클릭 시 이벤트 처리
+        // 다중 선택 목록 알림 대화상자 버튼 클릭 시 이벤트 처리 (체크박스)
         binding.btnAlertMulit.setOnClickListener{
             AlertDialog.Builder(this).run() {
                 setTitle("알림 - 다수 선택")
@@ -164,12 +164,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // 커스텀 다이얼로그의 XML 레이아웃을 바인딩하여 사용 (dialog_custom.xml 사용)
         val dialogBinding = DialogCustomBinding.inflate(layoutInflater)
 
+        // 커스텀 다이얼로그의 버튼 이벤트 처리를 위한 OnClickListener 정의
         val eventHandler3 = object: DialogInterface.OnClickListener {
             override fun onClick(dialog: DialogInterface?, which: Int) {
+                // 사용자가 "예" 버튼을 클릭했을 때
                 if (which == DialogInterface.BUTTON_POSITIVE) {
                     Log.d("mobileapp", "BUTTON_POSITIVE")
+                    // 선택된 라디오 버튼에 따라 버튼 텍스트 설정
                     if(dialogBinding.rbtn1.isChecked) {
                         binding.btnAlertCustom.text = dialogBinding.rbtn1.text.toString()
                     }
@@ -183,6 +187,7 @@ class MainActivity : AppCompatActivity() {
                         binding.btnAlertCustom.text = dialogBinding.rbtn4.text.toString()
                     }
                 }
+                // 사용자가 "아니오" 버튼을 클릭했을 때
                 else if (which == DialogInterface.BUTTON_NEGATIVE) {
                     Log.d("mobileapp", "BUTTON_NEGATIVE")
                 }
@@ -195,8 +200,10 @@ class MainActivity : AppCompatActivity() {
                 setTitle("알림 - 사용자 화면")
                 setIcon(android.R.drawable.ic_dialog_alert)
 
+                // 커스텀 다이얼로그의 레이아웃 설정
                 setView(dialogBinding.root)
 
+                // "예" 버튼 및 "아니오" 버튼에 대한 이벤트 처리 설정
                 setPositiveButton("예", eventHandler3)
                 setNegativeButton("아니오", eventHandler3)
                 show()
@@ -204,28 +211,37 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Option Menu
+    // 옵션 메뉴
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        // 옵션 메뉴를 확장하여 메뉴 아이템을 추가
+        // menu_navigation.xml 파일에 정의된 메뉴 리소스를 인플레이트하여 옵션 메뉴에 추가
         menuInflater.inflate(R.menu.menu_navigation, menu)
+        // 추가적인 초기화나 설정 작업
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // 옵션 메뉴 아이템 클릭 이벤트 처리
         when(item.itemId) {
             R.id.item1 -> {
+                // 메뉴 1 아이템 선택 시
                 Log.d("mobileapp", "Option menu : 메뉴 1")
+                // 버튼 텍스트 색상 변경
                 binding.btnDate.setTextColor(Color.parseColor("#FFFF00"))
                 true
             }
             R.id.item2 -> {
+                // 메뉴 2 아이템 선택 시
                 Log.d("mobileapp", "Option menu : 메뉴 2")
                 true
             }
             R.id.item3 -> {
+                // 메뉴 3 아이템 선택 시
                 Log.d("mobileapp", "Option menu : 메뉴 3")
                 true
             }
             R.id.item4 -> {
+                // 메뉴 4 아이템 선택 시
                 Log.d("mobileapp", "Option menu : 메뉴 4")
                 true
             }
