@@ -23,15 +23,21 @@ class MainActivity : AppCompatActivity() {
 
     // 바인딩 객체 생성
     lateinit var binding : ActivityMainBinding
+    // 네비게이션 드로어의 열고 닫힘 상태를 토글하는 객체 생성
     lateinit var toggle : ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // 액티비티 메인 바인딩 객체 생성
         binding = ActivityMainBinding.inflate(layoutInflater)
+        // 액티비티의 레이아웃으로 설정
         setContentView(binding.root)
 
+        // ActionBarDrawerToggle 객체 생성 및 초기화
         toggle = ActionBarDrawerToggle(this, binding.drawer, R.string.drawer_opened, R.string.drawer_closed)
+        // 액션바에 토글 버튼 표시
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        // 토글의 현재 상태를 액션바에 동기화
         toggle.syncState()
 
         // 날짜 선택 다이얼로그 띄우기
@@ -224,7 +230,7 @@ class MainActivity : AppCompatActivity() {
         // menu_navigation.xml 파일에 정의된 메뉴 리소스를 인플레이트하여 옵션 메뉴에 추가
         menuInflater.inflate(R.menu.menu_navigation, menu)
 
-        // 뷰를 가지고 있는 메뉴 아이템을 추가
+        // 뷰를 가지고 있는 메뉴 아이템을 추가 (SearchView로 캐스팅)
         // import 단축키 (alt + enter)
         val searchView = menu?.findItem(R.id.menu_search)?.actionView as SearchView
 
