@@ -1,9 +1,12 @@
 package com.example.jetpacklapplication
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.jetpacklapplication.databinding.FragmentOneBinding
 
@@ -32,12 +35,29 @@ class OneFragment : Fragment() {
         }
     }
 
+    // Fragment 작성
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Fragment 레이아웃을 인플레이트하여 바인딩
         val binding = FragmentOneBinding.inflate(inflater, container, false)
+        binding.fragButton.setOnClickListener {
+            binding.oneFragment.setBackgroundColor(Color.parseColor("#00ffff"))
+
+            Toast.makeText(context, "oneFragment", Toast.LENGTH_LONG).show()
+
+            context?.let { it1 -> // non-null 만 들어올 수 있음
+                AlertDialog.Builder(it1).run() {
+                    setTitle("알림 - 모바일 앱")
+                    setIcon(android.R.drawable.ic_dialog_alert)
+                    setMessage("정말로 종료하시겠습니까?")
+                    setPositiveButton("예", null)
+                    setNegativeButton("아니오", null)
+                    show()
+                }
+            }
+        }
         return binding.root
     }
 
