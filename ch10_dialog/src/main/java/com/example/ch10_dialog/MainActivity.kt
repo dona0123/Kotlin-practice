@@ -17,9 +17,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import com.example.ch10_dialog.databinding.ActivityMainBinding
 import com.example.ch10_dialog.databinding.DialogCustomBinding
+import com.google.android.material.navigation.NavigationView
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     // 바인딩 객체 생성
     lateinit var binding : ActivityMainBinding
@@ -39,6 +40,8 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         // 토글의 현재 상태를 액션바에 동기화
         toggle.syncState()
+
+        binding.mainDrawerView.setNavigationItemSelectedListener(this)
 
         // 날짜 선택 다이얼로그 띄우기
         binding.btnDate.setOnClickListener {
@@ -224,6 +227,33 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.item1 -> {
+                // 메뉴 1 아이템 선택 시
+                Log.d("mobileapp", "Navigation menu : 메뉴 1")
+                // 버튼 텍스트 색상 변경
+                binding.btnDate.setTextColor(Color.parseColor("#FFFF00"))
+                true
+            }
+            R.id.item2 -> {
+                // 메뉴 2 아이템 선택 시
+                Log.d("mobileapp", "Navigation menu : 메뉴 2")
+                true
+            }
+            R.id.item3 -> {
+                // 메뉴 3 아이템 선택 시
+                Log.d("mobileapp", "Navigation menu : 메뉴 3")
+                true
+            }
+            R.id.item4 -> {
+                // 메뉴 4 아이템 선택 시
+                Log.d("mobileapp", "Navigation menu : 메뉴 4")
+                true
+            }
+        }
+        return false
+    }
     // 옵션 메뉴
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         // 옵션 메뉴를 확장하여 메뉴 아이템을 추가

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.jetpacklapplication.databinding.ActivityMainBinding
+import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
     // View Binding을 사용하여 레이아웃과 바인딩
@@ -33,5 +34,10 @@ class MainActivity : AppCompatActivity() {
 
         // ViewPager2에 어댑터 설정
         binding.viewpager.adapter = MyFragmentPagerAdapter(this)
+
+        TabLayoutMediator(binding.tabs, binding.viewpager) {
+            tab, position ->
+                tab.text = "Tab ${position + 1}"
+        }.attach()
     }
 }

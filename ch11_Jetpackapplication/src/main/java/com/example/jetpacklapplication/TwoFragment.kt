@@ -92,7 +92,8 @@ class TwoFragment : Fragment() {
         }
 
         // adapter & viewHolder
-        binding.recyclerView.adapter = MyRcyclerAdater(datas)
+        val adapter = MyRcyclerAdater(datas)
+        binding.recyclerView.adapter = adapter // MyRcyclerAdaper(datas)
 
         // layoutManger
         val linear = LinearLayoutManager(activity)
@@ -104,6 +105,11 @@ class TwoFragment : Fragment() {
 
         // 선택적 꾸미기
         binding.recyclerView.addItemDecoration(MyDecoration(activity as Context))
+
+        binding.mainFab.setOnClickListener{
+            datas.add("Android Add")
+            adapter.notifyDataSetChanged()
+        }
 
 
         return binding.root
