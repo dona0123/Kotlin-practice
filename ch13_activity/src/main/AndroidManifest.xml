@@ -10,6 +10,7 @@
         android:theme="@style/Theme.MyApplication">
         <activity
             android:name=".AddActivity"
+            android:parentActivityName=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
