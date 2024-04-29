@@ -4,7 +4,9 @@ import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -227,34 +229,46 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
+    // 네비게이션 항목 선택 처리
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.item1 -> {
-                // 메뉴 1 아이템 선택 시
-                Log.d("mobileapp", "Navigation menu : 메뉴 1")
-                // 버튼 텍스트 색상 변경
-                binding.btnDate.setTextColor(Color.parseColor("#FFFF00"))
+            R.id.item_info -> {
+                // item_info 아이템 선택 시, 웹 브라우저 연동
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://m.duksung.ac.kr"))
+                startActivity(intent)
                 true
             }
-            R.id.item2 -> {
-                // 메뉴 2 아이템 선택 시
-                Log.d("mobileapp", "Navigation menu : 메뉴 2")
+            R.id.item_map -> {
+                // item_map 아이템 선택 시, 지도 연결
+                // val intent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:37.5662952,126.9779451"))
+                // 덕성여대 -> 안국역 지도 찾기
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/maps/dir/덕성여자대학교/안국역/"))
+                startActivity(intent)
                 true
             }
-            R.id.item3 -> {
-                // 메뉴 3 아이템 선택 시
-                Log.d("mobileapp", "Navigation menu : 메뉴 3")
+            R.id.item_gallery -> {
+                // item_gallery 아이템 선택 시, 갤러리 연결
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("content://media/internal/images/media"))
+                startActivity(intent)
                 true
             }
-            R.id.item4 -> {
-                // 메뉴 4 아이템 선택 시
-                Log.d("mobileapp", "Navigation menu : 메뉴 4")
+            R.id.item_call -> {
+                // item_call 아이템 선택 시, 전화
+                val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:010-6622-8182"))
+                startActivity(intent)
+                true
+            }
+            R.id.item_mail -> {
+                // item_mail 아이템 선택 시, 메일
+                val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:ehsk0123@duksung.ac.kr"))
+                startActivity(intent)
                 true
             }
         }
         return false
     }
-    // 옵션 메뉴
+
+    // 옵션 메뉴 생성
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         // 옵션 메뉴를 확장하여 메뉴 아이템을 추가
         // menu_navigation.xml 파일에 정의된 메뉴 리소스를 인플레이트하여 옵션 메뉴에 추가
@@ -262,6 +276,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         // 뷰를 가지고 있는 메뉴 아이템을 추가 (SearchView로 캐스팅)
         // import 단축키 (alt + enter)
+        // 검색 기능 추가
         val searchView = menu?.findItem(R.id.menu_search)?.actionView as SearchView
 
         // 검색어 입력 이벤트 처리
@@ -283,7 +298,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return super.onCreateOptionsMenu(menu)
     }
 
+    // 메뉴바 선택 처리
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // 토글 누르면 메뉴바 나옴
         if(toggle.onOptionsItemSelected(item)) {
             return true
         }

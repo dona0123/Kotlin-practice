@@ -86,16 +86,17 @@ class TwoFragment : Fragment() {
         // Inflate the layout for this fragment
         val binding = FragmentTwoBinding.inflate(inflater, container, false)
 
+        // 데이터 변경
         var datas = mutableListOf<String>()
         for(i in 1 .. 10) {
             datas.add("Item $i")
         }
 
-        // adapter & viewHolder
+        // adapter & viewHolder (어뎁터, 뷰 홀더)
         val adapter = MyRcyclerAdater(datas)
         binding.recyclerView.adapter = adapter // MyRcyclerAdaper(datas)
 
-        // layoutManger
+        // layoutManger (레이아웃 매니저)
         val linear = LinearLayoutManager(activity)
         binding.recyclerView.layoutManager = linear
         linear.orientation = LinearLayoutManager.HORIZONTAL
@@ -106,6 +107,7 @@ class TwoFragment : Fragment() {
         // 선택적 꾸미기
         binding.recyclerView.addItemDecoration(MyDecoration(activity as Context))
 
+        // 플로팅 버튼이 눌리면
         binding.mainFab.setOnClickListener{
             datas.add("Android Add")
             adapter.notifyDataSetChanged()

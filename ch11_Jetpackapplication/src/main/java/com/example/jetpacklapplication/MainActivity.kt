@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         // ViewPager2에 어댑터 설정
         binding.viewpager.adapter = MyFragmentPagerAdapter(this)
 
+        // 탭과 플래그먼트 연결
         TabLayoutMediator(binding.tabs, binding.viewpager) {
             tab, position ->
                 tab.text = "Tab ${position + 1}"
