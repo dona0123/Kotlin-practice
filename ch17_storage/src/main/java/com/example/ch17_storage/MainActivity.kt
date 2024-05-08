@@ -1,10 +1,16 @@
 package com.example.ch17_storage
 
 import android.content.Intent
+import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
+import android.util.TypedValue
+import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ch17_storage.databinding.ActivityMainBinding
@@ -16,12 +22,27 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding : ActivityMainBinding
     var datas: MutableList<String>? = null
     lateinit var adapter: MyAdapter
+    lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+
+        // 색상 바꾸기
+        val color = sharedPreferences.getString("color", "#ffff00")
+        binding.lastsaved.setBackgroundColor(Color.parseColor(color))
+
+        // 타이틀 바꾸기
+        val idstr = sharedPreferences.getString("id", "")
+        binding.tvTitle.text = idstr
+
+        // 크키 바꾸기
+        val size = sharedPreferences.getString("size", "16.0f")
+        binding.lastsaved.setTextSize(TypedValue.COMPLEX_UNIT_DIP, size!!.toFloat())
 
         datas = mutableListOf<String>()
         val db = DBHelper(this).readableDatabase
@@ -78,6 +99,36 @@ class MainActivity : AppCompatActivity() {
 
             requestLauncher.launch(intent)
         }
+    }
+
+    // 메뉴 연결
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_setting, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId === R.id.menu_main_setting) {
+            val intent = Intent(this, SettingActivity::class.java)
+            startActivity(intent)
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    // 재시작 하지 않아도 바로 설정 적용
+    override fun onResume() {
+        super.onResume()
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val color = sharedPreferences.getString("color", "#ffff00")
+        binding.lastsaved.setBackgroundColor(Color.parseColor(color))
+
+        val idstr = sharedPreferences.getString("id", "")
+        binding.tvTitle.text = idstr
+
+        val size = sharedPreferences.getString("size", "16.0f")
+        binding.lastsaved.setTextSize(TypedValue.COMPLEX_UNIT_DIP, size!!.toFloat())
+
     }
 
     /*
