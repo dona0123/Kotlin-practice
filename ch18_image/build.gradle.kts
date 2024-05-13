@@ -1,15 +1,14 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    id("kotlin-kapt")
 }
 
 android {
-    namespace = "com.example.joyceapplication"
+    namespace = "com.example.ch18_image"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.joyceapplication"
+        applicationId = "com.example.ch18_image"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -34,10 +33,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-
-    viewBinding {
-        enable = true
-    }
 }
 
 dependencies {
@@ -50,23 +45,4 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.google.code.gson:gson:2.8.9")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-
-
-    // retrofit2
-    implementation("com.squareup.retrofit2:retrofit:2.0.0")
-
-    // gson
-    implementation("com.google.code.gson:gson:2.8.9")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-
-    // tikxml
-    implementation("com.tickaroo.tikxml:annotation:0.8.13")
-    implementation("com.tickaroo.tikxml:core:0.8.13")
-    implementation("com.tickaroo.tikxml:retrofit-converter:0.8.13")
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    kapt ("com.tickaroo.tikxml:processor:0.8.13")
 }

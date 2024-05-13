@@ -1,11 +1,17 @@
 package com.example.joyceapplication
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.joyceapplication.databinding.FragmentXmlBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,6 +42,33 @@ class XmlFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragmen
         val binding = FragmentXmlBinding.inflate(inflater, container, false)
+
+        val year = arguments?.getString("searchYear") ?: "2024"
+
+        val call: Call<XmlResponse> = RetrofitConnection.xmlNetServ.getXmlList(
+            year.toInt(),
+            1,
+            10,
+            "xml",
+            "Vpi6St7a9MH4GooTM8GMZzlO/b1I8Ca6+/oMMAoGq2TKh0ZSAlodtCklIu5P7XIGUqy5i6P7XmMV5j0Erj7Aww=="
+        )
+
+        call?.enqueue(object : Callback<XmlResponse>{
+            override fun onResponse(call: Call<XmlResponse>, response: Response<XmlResponse>) {
+                if(response.isSuccessful){
+                    Log.d("mobileApp", "$response")
+                    Log.d("mobileApp", "${response.body()}")
+                    binding.xmlRecyclerView.adapter = XmlAdapter(response.body()!!.body!!.items!!.item)
+                    binding.xmlRecyclerView.layoutManager = LinearLayoutManager(activity)
+                    binding.xmlRecyclerView.addItemDecoration(DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL))
+                }
+            }
+
+            override fun onFailure(call: Call<XmlResponse>, t: Throwable) {
+                Log.d("mobileApp", "${call.request()}")
+            }
+        })
+
         return binding.root
     }
 
