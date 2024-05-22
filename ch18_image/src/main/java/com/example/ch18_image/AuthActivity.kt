@@ -4,8 +4,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ch18_image.databinding.ActivityAuthBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.GoogleAuthProvider
 
 class AuthActivity : AppCompatActivity() {
     lateinit var binding: ActivityAuthBinding
@@ -88,7 +93,7 @@ class AuthActivity : AppCompatActivity() {
                     Log.d("mobileapp", "로그 아웃")
                     finish()
                 }
-        /*
+
                         val requestLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                             val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
                             Log.d("mobileapp","account1 : ${task.toString()}")
@@ -100,19 +105,19 @@ class AuthActivity : AppCompatActivity() {
                                     .addOnCompleteListener(this){task ->
                                         if(task.isSuccessful){
                                             MyApplication.email = account.email
-                                            Toast.makeText(baseContext,"구글 로그인 성공",Toast.LENGTH_SHORT).show()
+                                            Toast.makeText(baseContext,"구글 로그인 성공",Toast.LENGTH_LONG).show()
                                             Log.d("mobileapp", "구글 로그인 성공")
                                             finish()
                                         }
                                         else{
                                             changeVisibility("logout")
-                                            Toast.makeText(baseContext,"구글 로그인 실패",Toast.LENGTH_SHORT).show()
+                                            Toast.makeText(baseContext,"구글 로그인 실패",Toast.LENGTH_LONG).show()
                                             Log.d("mobileapp", "구글 로그인 실패")
                                         }
                                     }
                             }catch (e: ApiException){ // APIException은 이미 지정된 exception말고 custom한 exception을 만들어서 쓰고 싶을때 사용
                                 changeVisibility("logout")
-                                Toast.makeText(baseContext,"구글 로그인 Exception : ${e.printStackTrace()},${e.statusCode}",Toast.LENGTH_SHORT).show()
+                                Toast.makeText(baseContext,"구글 로그인 Exception : ${e.printStackTrace()},${e.statusCode}",Toast.LENGTH_LONG).show()
                                 Log.d("mobileapp", "구글 로그인 Exception : ${e.message}, ${e.statusCode}")
                             }
                         }
@@ -127,7 +132,7 @@ class AuthActivity : AppCompatActivity() {
                             requestLauncher.launch(signInIntent)
                         }
 
-                         */
+
     }
 
     fun changeVisibility(mode:String){

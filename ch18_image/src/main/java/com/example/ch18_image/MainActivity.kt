@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -66,33 +67,41 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         binding.btnSearch.setOnClickListener{
-            val name = binding.edtName.text.toString()
-            Log.d("mobileapp", name)
 
-            val call: Call<XmlResponse> = RetrofitConnection.xmlNetworkService.getXmlList(
-                name,
-                1,
-                10,
-                "xml",
-                "Vpi6St7a9MH4GooTM8GMZzlO/b1I8Ca6+/oMMAoGq2TKh0ZSAlodtCklIu5P7XIGUqy5i6P7XmMV5j0Erj7Aww==" // 일반인증키(Decoding)
-            )
+            if(MyApplication.checkAuth()){
+                val name = binding.edtName.text.toString()
+                Log.d("mobileapp", name)
 
-            call?.enqueue(object : Callback<XmlResponse> {
-                override fun onResponse(call: Call<XmlResponse>, response: Response<XmlResponse>) {
-                    if(response.isSuccessful){
-                        Log.d("mobileApp", "$response")
-                        Log.d("mobileApp", "${response.body()}")
-                        binding.xmlRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
-                        binding.xmlRecyclerView.adapter = XmlAdapter(response.body()!!.body!!.items!!.item)
-                        binding.xmlRecyclerView.addItemDecoration(DividerItemDecoration(applicationContext, LinearLayoutManager.VERTICAL))
+                val call: Call<XmlResponse> = RetrofitConnection.xmlNetworkService.getXmlList(
+                    name,
+                    1,
+                    10,
+                    "xml",
+                    "Vpi6St7a9MH4GooTM8GMZzlO/b1I8Ca6+/oMMAoGq2TKh0ZSAlodtCklIu5P7XIGUqy5i6P7XmMV5j0Erj7Aww==" // 일반인증키(Decoding)
+                )
+
+                call?.enqueue(object : Callback<XmlResponse> {
+                    override fun onResponse(call: Call<XmlResponse>, response: Response<XmlResponse>) {
+                        if(response.isSuccessful){
+                            Log.d("mobileApp", "$response")
+                            Log.d("mobileApp", "${response.body()}")
+                            binding.xmlRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
+                            binding.xmlRecyclerView.adapter = XmlAdapter(response.body()!!.body!!.items!!.item)
+                            binding.xmlRecyclerView.addItemDecoration(DividerItemDecoration(applicationContext, LinearLayoutManager.VERTICAL))
+                        }
                     }
-                }
 
-                override fun onFailure(call: Call<XmlResponse>, t: Throwable) {
-                    Log.d("mobileApp", "onFailure ${call.request()}")
-                }
-            })
+                    override fun onFailure(call: Call<XmlResponse>, t: Throwable) {
+                        Log.d("mobileApp", "onFailure ${call.request()}")
+                    }
+                })
+            }
+            else {
+                Toast.makeText(this, "인증을 먼저 해주세요..", Toast.LENGTH_SHORT).show()
+            }
+
         }
+
 
     }
 
@@ -108,6 +117,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     // Drawer 메뉴
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.item_board -> {
+                Log.d("mobileapp", "게시판 메뉴")
+                val intent = Intent(this, BoardActivity::class.java)
+                startActivity(intent)
+            }
             R.id.item_setting -> {
                 Log.d("mobileapp", "설정 메뉴")
                 binding.drawer.closeDrawers()
