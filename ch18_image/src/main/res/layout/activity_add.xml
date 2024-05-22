@@ -50,6 +50,18 @@
         android:inputType="textMultiLine" />
 
     <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이미지 불러오기"
+        android:id="@+id/uploadButton" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/addImageView"
+        android:visibility="gone"/>
+
+    <Button
         android:id="@+id/saveButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

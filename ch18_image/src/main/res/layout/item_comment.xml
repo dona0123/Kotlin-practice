@@ -53,4 +53,20 @@
         android:text="정말 스릴넘치는 영화였어요. 한 번 더 보고 싶은 영화!!!"
         android:textSize="14dp" />
 
+<!--    여기에 이미지 코드 추가 -->
+    <ImageView
+        android:id="@+id/itemImageView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="5dp"
+        android:scaleType="fitXY"
+        android:visibility="gone" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="200dp"
+        android:background="@color/black" />
+
 </LinearLayout>

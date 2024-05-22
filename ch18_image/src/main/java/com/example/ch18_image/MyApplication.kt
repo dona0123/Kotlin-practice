@@ -5,6 +5,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 
 
 // Dex : Dalvic Executable (64k)
@@ -15,6 +17,9 @@ class MyApplication : MultiDexApplication() {
 
         // 파이어스토어에 접근
         lateinit var db: FirebaseFirestore
+
+        // 스토리지
+        lateinit var storage : FirebaseStorage
 
         fun checkAuth(): Boolean {
             var currentUser = auth.currentUser
@@ -31,5 +36,6 @@ class MyApplication : MultiDexApplication() {
         super.onCreate()
         auth = Firebase.auth
         db = FirebaseFirestore.getInstance()
+        storage = Firebase.storage
     }
 }
