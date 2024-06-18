@@ -9,6 +9,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/VoteApplication" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/ch06_view" />
             <option value="$PROJECT_DIR$/ch07_layout" />
@@ -18,7 +19,6 @@
             <option value="$PROJECT_DIR$/ch11_Jetpackapplication" />
             <option value="$PROJECT_DIR$/ch13_activity" />
             <option value="$PROJECT_DIR$/ch17_storage" />
-            <option value="$PROJECT_DIR$/ch18_image" />
             <option value="$PROJECT_DIR$/joyceapplication" />
           </set>
         </option>

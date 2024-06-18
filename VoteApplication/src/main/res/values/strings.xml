@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ch18_image</string>
+    <string name="app_name">VoteWise</string>
     <string name="drawer_opened">Opened Drawer</string>
     <string name="drawer_closed">Closed Drawer</string>
     <string name="default_client_id">836919302381-kt6vvnh3g478kb1b04ceuj1ehtfq1dgm.apps.googleusercontent.com</string>
