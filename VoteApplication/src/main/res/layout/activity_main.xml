@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- 1. 본 화면 -->
+    <!-- 본 화면 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,33 +19,53 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <EditText
+                android:id="@+id/edtName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/edtName"
                 android:hint="제품명을 입력하세요. 예: 고구마" />
+
             <Button
+                android:id="@+id/btnSearch"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="검색"
-                android:id="@+id/btnSearch" />
+                android:text="검색" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/xmlRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:id="@+id/xmlRecyclerView"
             android:background="#ffffee" />
+
+        <!-- TabLayout 추가 -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            app:tabGravity="fill"
+            app:tabMode="fixed" />
+
+        <!-- ViewPager2 추가 -->
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
     </LinearLayout>
 
-    <!-- 2. 드로어 화면 -->
+    <!-- 드로어 화면 -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/mainDrawerView"
         android:layout_width="300dp"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_gravity="start"
         app:headerLayout="@layout/navigation_header"
-        app:menu="@menu/menu_navigation"/>
+        app:menu="@menu/menu_navigation" />
+
 </androidx.drawerlayout.widget.DrawerLayout>

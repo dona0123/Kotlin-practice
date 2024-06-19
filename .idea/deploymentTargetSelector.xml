@@ -8,6 +8,9 @@
       <SelectionState runConfigName="VoteApplication">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+      <SelectionState runConfigName="ch11_Jetpackapplication">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
     </selectionStates>
   </component>
 </project>
