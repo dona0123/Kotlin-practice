@@ -25,7 +25,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="제품명을 입력하세요. 예: 고구마" />
+                android:hint="시도명을 입력하세요. 예: 서울특별시" />
 
             <android.widget.Button
                 android:id="@+id/btnSearch"

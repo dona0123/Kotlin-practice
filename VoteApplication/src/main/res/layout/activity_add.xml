@@ -15,7 +15,7 @@
         android:background="#0404B4"
         android:gravity="center"
         android:padding="15dp"
-        android:text="한줄평 작성하기"
+        android:text="투표 인증하기"
         android:textColor="#FFFFFF"
         android:textSize="25sp"
         android:textStyle="bold" />
