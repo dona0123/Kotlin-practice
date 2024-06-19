@@ -6,6 +6,7 @@ import TwoFragment
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -181,8 +182,28 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val color = sharedPreferences.getString("color", "#FFFFFF")
         binding.tabs.setBackgroundColor(Color.parseColor(color))
 
+        val size = sharedPreferences.getString("size", "16")
+        binding.edtName.textSize = size!!.toFloat()
 
+        val tv = headerView.findViewById<TextView>(R.id.tvID)
+        val name = sharedPreferences.getString("id", "${MyApplication.email}")
+        tv.text = "${name}님 \n 반갑습니다."
 
+        val font = sharedPreferences.getString("font", "normal")
+
+        when (font) {
+            "bold" -> {
+                tv.setTypeface(null, Typeface.BOLD) // tv는 TextView의 ID
+            }
+
+            "italic" -> {
+                tv.setTypeface(null, Typeface.ITALIC) // tv는 TextView의 ID
+            }
+
+            else -> {
+                tv.setTypeface(null, Typeface.NORMAL) // 기본 폰트 설정
+            }
+        }
     }
 
     // ViewPager2에 사용될 FragmentStateAdapter 구현

@@ -39,6 +39,7 @@
                 android:numStars="5"
                 android:rating="5.0"
                 android:stepSize="0.1"
+                android:visibility="invisible"
                 style="?android:attr/ratingBarStyleSmall" />
 
         </LinearLayout>

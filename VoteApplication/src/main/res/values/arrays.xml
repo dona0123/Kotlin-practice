@@ -1,17 +1,42 @@
 <resources>
     <!-- Reply Preference -->
     <string-array name="color_entries">
-        <item>빨강</item>
-        <item>노랑</item>
         <item>초록</item>
+        <item>노랑</item>
+        <item>파랑</item>
         <item>하양</item>
 
     </string-array>
 
     <string-array name="color_values">
-        <item>#ff0000</item>
-        <item>#ffff00</item>
         <item>#00ff00</item>
+        <item>#ffff00</item>
+        <item>#045FB4</item>
         <item>#ffffff</item>
     </string-array>
+
+    <string-array name="size_entries">
+        <item>작게</item>
+        <item>보통</item>
+        <item>크게</item>
+    </string-array>
+
+    <string-array name="size_values">
+        <item>12.0f</item>
+        <item>16.0f</item>
+        <item>20.0f</item>
+    </string-array>
+
+    <string-array name="font_style_entries">
+        <item>기본</item>
+        <item>볼드</item>
+        <item>이탤릭</item>
+    </string-array>
+
+    <string-array name="font_style_values">
+        <item>normal</item>
+        <item>bold</item>
+        <item>italic</item>
+    </string-array>
+
 </resources>
