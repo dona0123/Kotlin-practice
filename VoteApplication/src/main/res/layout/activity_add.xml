@@ -6,18 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#ddffcc"
+    android:background="#FFFFFF"
     tools:context=".AddActivity">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#536DFE"
+        android:background="#0404B4"
         android:gravity="center"
         android:padding="15dp"
         android:text="한줄평 작성하기"
         android:textColor="#FFFFFF"
         android:textSize="25sp"
         android:textStyle="bold" />
+
     <TextView
         android:id="@+id/tv_id"
         android:layout_width="match_parent"
@@ -36,8 +38,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:isIndicator="false"
+            android:visibility="invisible"
             android:numStars="5"
             android:stepSize="1" />
+
     </LinearLayout>
 
     <EditText
@@ -49,11 +53,31 @@
         android:hint="내용"
         android:inputType="textMultiLine" />
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="이미지 불러오기"
-        android:id="@+id/uploadButton" />
+        android:orientation="horizontal">
+
+        <android.widget.Button
+            android:id="@+id/uploadButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#045FB4"
+            android:textColor="#FFFFFF"
+            android:text="인증사진 첨부하기" />
+
+        <android.widget.Button
+            android:id="@+id/saveButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="저장하기"
+            android:background="#045FB4"
+            android:textColor="#FFFFFF"
+            android:textSize="13dp" />
+
+    </LinearLayout>
 
     <ImageView
         android:layout_width="match_parent"
@@ -61,11 +85,4 @@
         android:id="@+id/addImageView"
         android:visibility="gone"/>
 
-    <Button
-        android:id="@+id/saveButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="저장하기"
-        android:textSize="16dp"
-        android:layout_marginTop="50dp" />
 </LinearLayout>
