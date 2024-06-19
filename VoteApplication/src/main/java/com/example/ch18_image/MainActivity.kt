@@ -1,5 +1,6 @@
 package com.example.ch18_image
 
+import FourFragment
 import ThreeFragment
 import TwoFragment
 import android.content.Intent
@@ -169,7 +170,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         // ViewPager2에 표시될 Fragment 목록
         private val fragments: List<Fragment> =
-            listOf(Fragment(), TwoFragment(), ThreeFragment())
+            listOf(TwoFragment(), ThreeFragment(), FourFragment())
 
         override fun getItemCount(): Int {
             return fragments.size
