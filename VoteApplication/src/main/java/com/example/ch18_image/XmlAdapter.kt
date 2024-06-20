@@ -3,7 +3,6 @@ package com.example.ch18_image
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.ch18_image.databinding.ItemMainBinding
 
 class XmlViewHolder(val binding: ItemMainBinding): RecyclerView.ViewHolder(binding.root)
@@ -21,20 +20,10 @@ class XmlAdapter(val datas:MutableList<myXmlItem>?): RecyclerView.Adapter<Recycl
         val model = datas!![position]           // 1-2
 
         // 1-3
-        binding.name.text = model.prdlstNm
-        binding.manufacture.text = model.manufacture
-        binding.nutrient.text = model.nutrient
+        binding.name.text = model.placeName
+        binding.manufacture.text = model.addr
+        binding.nutrient.text = model.floor
 
-        //이미지 불러오기
-        Glide.with(binding.root)
-            .load(model.imgurl1)
-            .override(400,300)
-            .into(binding.urlImage)
-
-        Glide.with(binding.root)
-            .load(model.imgurl2)
-            .override(400,300)
-            .into(binding.urlImage2)
 
     }
 }

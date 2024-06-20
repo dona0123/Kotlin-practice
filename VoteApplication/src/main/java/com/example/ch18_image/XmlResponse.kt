@@ -25,15 +25,11 @@ data class myXmlItems(
 @Xml(name="item")
 data class myXmlItem(
     @PropertyElement
-    val prdlstNm:String?,
+    val placeName:String?,
     @PropertyElement
-    val nutrient:String?,
+    val addr:String?,
     @PropertyElement
-    val manufacture:String?,
-    @PropertyElement
-    val imgurl1:String?,
-    @PropertyElement
-    val imgurl2:String?
+    val floor:String?
 ) {
-    constructor() : this(null, null, null, null, null)
+    constructor() : this(null, null, null)
 }
